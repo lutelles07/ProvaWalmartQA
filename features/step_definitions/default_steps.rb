@@ -10,7 +10,7 @@ Dado(/^eu preencho o campo de busca com o texto "([^"]*)"$/) do |produto|
 end
 
 Dado(/^o resultado da busca seja exibido$/) do
-  page.has_content("Resultados de busca para")
+  page.should have_content('Resultados de busca para')
 end
 
 Dado(/^eu clique no botao "([^"]*)"$/) do |botao|
@@ -18,14 +18,15 @@ Dado(/^eu clique no botao "([^"]*)"$/) do |botao|
 end
 
 Dado(/^eu clico em adicionar ao carrinho$/) do 
-  page.find(:css, 'button.buy-button.btn.btn-success').click
+ page.find(:xpath, '//a/span[@class="product-title"]',match: :first).click
+click_button ('Adicionar ao carrinho')
 end
 
 Dado(/^eu devo ver o pop up de "([^"]*)"$/) do |texto|
-  page.has_content? (texto)
+  page.should have_content?(texto)
 end
 
 Entao(/^eu devo ver que a TV foi adicionado ao carrinho com sucesso$/) do 
- page.has_content? ("Meu carrinho")
- page.has_content? ("TV")
+ page.should have_content?("Meu carrinho")
+ page.should have_content?("TV")
 end
